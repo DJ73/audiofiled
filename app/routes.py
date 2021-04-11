@@ -1,12 +1,19 @@
+from app.functions.get import get_all_files, get_file
+import re
+from app.functions.delete import remove_audio
 from app import app
 from flask import request
 from app.functions.create import insert_audio
+from app.functions.delete import remove_audio
+from app.functions.update import update_audio
 
-@app.route('/')
+
+@app.route("/")
 def base():
     return "Welcome to AudioFiled"
 
-@app.route('/create', methods=['POST'])
+
+@app.route("/create", methods=["POST"])
 def create_audio():
     """
     Expects JSON data object with two keys:
@@ -19,17 +26,23 @@ def create_audio():
 
     return db_insert
 
-@app.route('/delete/<any(song, podcast, audiobook):audioFileType>/<int:audioFileID>')
+
+@app.route("/delete/<any(song, podcast, audiobook):audioFileType>/<int:audioFileID>")
 def delete_audio(audioFileType, audioFileID):
     """
     Deletes the corresponding audio file from database
     Returns 404 if not found
     """
 
-    return f"{audioFileID} has been deleted successfully", 200
+    db_remove = remove_audio(audioFileType, audioFileID)
 
-@app.route('/update/<any(song, podcast, audiobook):audioFileType>/<int:audioFileID>',
-methods = ["POST"])
+    return db_remove
+
+
+@app.route(
+    "/update/<any(song, podcast, audiobook):audioFileType>/<int:audioFileID>",
+    methods=["POST"],
+)
 def update_audio(audioFileType, audioFileID):
     """
     Updates an audio file with new metadata
@@ -38,20 +51,28 @@ def update_audio(audioFileType, audioFileID):
     """
     request_data = request.get_json()
 
-    return f"{audioFileID} updated successfully", 200
+    db_update = update_audio(audioFileType, audioFileID, request_data)
 
-@app.route('/get/<any(song, podcast, audiobook):audioFileType>')
+    return db_update
+
+
+@app.route("/get/<any(song, podcast, audiobook):audioFileType>")
 def get_all_audio(audioFileType):
     """
     Returns all the audio files in database of given type
     """
 
-    return f"{audioFileType}", 200
+    db_get_all = get_all_files(audioFileType)
 
-@app.route('/get/<any(song, podcast, audiobook):audioFileType>/<int:audioFileID>')
+    return db_get_all
+
+
+@app.route("/get/<any(song, podcast, audiobook):audioFileType>/<int:audioFileID>")
 def get_audio(audioFileType, audioFileID):
     """
     Returns JSON formatted details of a specific file
     """
 
-    return f"{audioFileType}-{audioFileID}", 200
+    db_get_audio = get_file(audioFileType, audioFileID)
+
+    return db_get_audio
