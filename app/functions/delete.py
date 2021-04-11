@@ -15,6 +15,6 @@ def remove_audio(audio_type, audio_id):
         db.session.commit()
         db.session.delete(audio)
         db.session.commit()
-        return f"{afile.name} deleted"
+        return f"{afile} deleted"
     else:
         abort(400, description="Bad Request: Invalid File Type")

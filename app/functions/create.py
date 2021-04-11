@@ -13,6 +13,6 @@ def insert_audio(audio_data):
         )
         db.session.add(afile)
         db.session.commit()
-        return f"{afile.name} inserted"
+        return f"{afile} inserted"
     else:
         return abort(400, description="Bad Request: Invalid File Type")

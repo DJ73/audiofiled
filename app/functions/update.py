@@ -13,6 +13,6 @@ def update_audio(audio_type, audio_id, audio_data):
             abort(404, description=f"{audio_type} with ID {audio_id} not found")
         afile.update(**audio_data)
         db.session.commit()
-        return f"{afile.name} updated"
+        return f"{afile} updated"
     else:
         abort(400, description="Bad Request: Invalid File Type")
