@@ -1,5 +1,6 @@
 from app import app
 from flask import request
+from app.functions.create import insert_audio
 
 @app.route('/')
 def base():
@@ -14,7 +15,9 @@ def create_audio():
     """
     request_data = request.get_json()
 
-    return request_data
+    db_insert = insert_audio(request_data)
+
+    return db_insert
 
 @app.route('/delete/<any(song, podcast, audiobook):audioFileType>/<int:audioFileID>')
 def delete_audio(audioFileType, audioFileID):
