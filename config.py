@@ -5,7 +5,11 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    # Hack to convert postgres to postgresql in Heroku
+    DATABASE_URL = os.environ.get("DATABASE_URL")
+    i = DATABASE_URL.find("://")
+    DATABASE_URL = "postgresql" + DATABASE_URL[i:]
+    SQLALCHEMY_DATABASE_URI = DATABASE_URL
 
     def __init__(self) -> None:
         super().__init__()

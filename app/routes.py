@@ -1,11 +1,9 @@
-from app.functions.get import get_all_files, get_file
-import re
-from app.functions.delete import remove_audio
 from app import app
 from flask import request
 from app.functions.create import insert_audio
 from app.functions.delete import remove_audio
 from app.functions.update import update_audio
+from app.functions.get import get_all_files, get_file
 
 
 @app.route("/")
