@@ -28,7 +28,7 @@ def test_create_audiobook_ok(client):
                     "title": "Tale of two cities",
                     "author": "Christopher Walkin",
                     "narrator": "Tom Hiddleston",
-                    "duration": 3411
+                    "duration": 3411,
                 },
             },
             content_type="application/json",
@@ -68,12 +68,14 @@ def test_update_audiobook_ok(client):
 
     with app.test_request_context():
         response = client.post(
-            url_for("update_audio", audioFileType="audiobook", audioFileID=AUDIOBOOK_ID),
+            url_for(
+                "update_audio", audioFileType="audiobook", audioFileID=AUDIOBOOK_ID
+            ),
             json={
                 "title": "Winery Dawn",
                 "author": "J C Penny",
                 "narrator": "Micheal Andrew",
-                "duration": 3141
+                "duration": 3141,
             },
             content_type="application/json",
         )

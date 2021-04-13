@@ -28,8 +28,8 @@ def test_create_podcast_ok(client):
                     "name": "Inedible plants",
                     "host": "Nestle",
                     "participants": ["Cadbury", "Jimmy"],
-                    "duration": 231
-                    },
+                    "duration": 231,
+                },
             },
             content_type="application/json",
         )
@@ -69,7 +69,12 @@ def test_update_podcast_ok(client):
     with app.test_request_context():
         response = client.post(
             url_for("update_audio", audioFileType="podcast", audioFileID=PODCAST_ID),
-            json={"name": "Hubble Space", "host": "Neil Tyson", "participants": ["NatGeo", "Tangerine"], "duration": 231},
+            json={
+                "name": "Hubble Space",
+                "host": "Neil Tyson",
+                "participants": ["NatGeo", "Tangerine"],
+                "duration": 231,
+            },
             content_type="application/json",
         )
 
