@@ -29,12 +29,13 @@ class Song(db.Model):
     def __init__(self, id, name, duration) -> None:
         super().__init__()
         self.id = id
-        self.update(name, duration)
-        self.upload_time = datetime.utcnow()
-
-    def update(self, name, duration) -> None:
         self.name = name
         self.duration = duration
+        self.upload_time = datetime.utcnow()
+
+    def update(self, **metadata) -> None:
+        for key, value in metadata.items():
+            setattr(self, key, value)
 
     def serialize(self) -> dict:
         return {
@@ -63,14 +64,15 @@ class Podcast(db.Model):
     def __init__(self, id, name, duration, host, participants) -> None:
         super().__init__()
         self.id = id
-        self.update(name, duration, host, participants)
-        self.upload_time = datetime.utcnow()
-
-    def update(self, name, duration, host, participants) -> None:
         self.name = name
         self.duration = duration
         self.host = host
         self.participants = participants
+        self.upload_time = datetime.utcnow()
+
+    def update(self, **metadata) -> None:
+        for key, value in metadata.items():
+            setattr(self, key, value)
 
     def serialize(self) -> dict:
         return {
@@ -101,14 +103,15 @@ class Audiobook(db.Model):
     def __init__(self, id, title, author, narrator, duration) -> None:
         super().__init__()
         self.id = id
-        self.update(title, author, narrator, duration)
-        self.upload_time = datetime.utcnow()
-
-    def update(self, title, author, narrator, duration) -> None:
         self.title = title
         self.author = author
         self.narrator = narrator
         self.duration = duration
+        self.upload_time = datetime.utcnow()
+
+    def update(self, **metadata) -> None:
+        for key, value in metadata.items():
+            setattr(self, key, value)
 
     def serialize(self) -> dict:
         return {
