@@ -45,13 +45,11 @@ def test_get_all_song_ok(client):
     """
 
     with app.test_request_context():
-        response = client.get(
-            url_for("get_all_audio", audioFileType="song")
-        )
+        response = client.get(url_for("get_all_audio", audioFileType="song"))
 
     assert response.status_code == 200
     res_data = response.get_json()
-    record = list(filter(lambda x: x["id"]==SONG_ID, res_data))
+    record = list(filter(lambda x: x["id"] == SONG_ID, res_data))
     assert len(record) == 1
     assert record[0]["name"] == "To the moon and back"
 
@@ -74,6 +72,7 @@ def test_update_song_ok(client):
     res_data = response.data.decode("utf-8")
     assert res_data.startswith("[SONG]")
     assert "November remember" in res_data
+
 
 def test_get_one_song_ok(client):
     """
