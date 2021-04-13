@@ -10,6 +10,7 @@ class Config(object):
     i = DATABASE_URL.find("://")
     DATABASE_URL = "postgresql" + DATABASE_URL[i:]
     SQLALCHEMY_DATABASE_URI = DATABASE_URL
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     def __init__(self) -> None:
         super().__init__()
