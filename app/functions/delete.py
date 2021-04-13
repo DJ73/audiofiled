@@ -1,6 +1,6 @@
-from app.models import MODELS, Audio
-from app import db
 from flask import abort
+from app import db
+from app.models import MODELS, Audio
 
 
 def remove_audio(audio_type, audio_id):

@@ -1,6 +1,6 @@
-from app.models import MODELS, Audio
-from app import db
 from flask import abort
+from app import db
+from app.models import MODELS, Audio
 
 
 def insert_audio(audio_data):

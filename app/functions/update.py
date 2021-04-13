@@ -1,9 +1,9 @@
-from app.models import MODELS, Audio
-from app import db
 from flask import abort
+from app import db
+from app.models import MODELS, Audio
 
 
-def update_audio(audio_type, audio_id, audio_data):
+def modify_audio(audio_type, audio_id, audio_data):
     if audio_type in MODELS:
         audio = Audio.query.filter_by(id=audio_id, type=audio_type).first()
         if audio is None:

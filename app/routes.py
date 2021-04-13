@@ -1,8 +1,8 @@
-from app import app
 from flask import request
+from app import app
 from app.functions.create import insert_audio
 from app.functions.delete import remove_audio
-from app.functions.update import update_audio
+from app.functions.update import modify_audio
 from app.functions.get import get_all_files, get_file
 
 
@@ -49,7 +49,7 @@ def update_audio(audioFileType, audioFileID):
     """
     request_data = request.get_json()
 
-    db_update = update_audio(audioFileType, audioFileID, request_data)
+    db_update = modify_audio(audioFileType, audioFileID, request_data)
 
     return db_update
 
